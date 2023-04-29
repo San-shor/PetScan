@@ -7,7 +7,8 @@ const cors = require("cors");
 require("dotenv").config();
 const PORT = process.env.SERVER_PORT || 5000;
 const DB_PORT = process.env.DB_PORT;
-const URI = process.env.DB_URL + DB_PORT + "/PetScan";
+const URI = process.env.DB_URL + "/petScan";
+console.log('sanjida apu',URI)
 
 const app = express();
 
