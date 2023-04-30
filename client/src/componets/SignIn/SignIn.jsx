@@ -92,7 +92,11 @@ const SignIn = () => {
             <Box
               component="form"
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "30vw" },
+                "& .MuiTextField-root": {
+                  m: 1,
+                  width: "20vw",
+                  height: "4.5rem",
+                },
               }}
               noValidate
               autoComplete="off"
@@ -108,7 +112,11 @@ const SignIn = () => {
             <Box
               component="form"
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "30vw" },
+                "& .MuiTextField-root": {
+                  m: 1,
+                  width: "20vw",
+                  height: "4.5rem",
+                },
               }}
               noValidate
               autoComplete="off"

@@ -136,7 +136,7 @@ const ProfileSideBar = () => {
               }
             />
           </ListItemButton>
-          {user === "petParent" ? (
+          {/* {user === "petParent" ? (    //legacy- (unnecesary)
             <Link to="/book-appointment">
               <ListItemButton
                 sx={{
@@ -156,7 +156,7 @@ const ProfileSideBar = () => {
                 />
               </ListItemButton>
             </Link>
-          ) : null}
+          ) : null} */}
         </List>
       </nav>
     </section>
