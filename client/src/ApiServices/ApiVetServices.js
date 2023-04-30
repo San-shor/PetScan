@@ -5,6 +5,7 @@ const BASE_URL = "http://localhost:3001";
 const apiVet = {};
 
 apiVet.signup = async (user) => {
+  console.log(user);
   try {
     const response = await axios.post(`${BASE_URL}/signup/vet`, user);
     return response.data;

@@ -46,9 +46,11 @@ const VetSignUp = () => {
       email,
       password,
     };
-
+     
+    console.log(newVet);
     // send the user data to the server
     try {
+      console.log('try er vhitor ashce');
       const response = await apiVet.signup(newVet);
       // save the token in the local storage
       const { accessToken, fullName, email, user } = response;

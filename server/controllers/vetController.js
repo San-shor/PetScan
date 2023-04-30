@@ -35,14 +35,14 @@ authVet.signUp = async (req, res) => {
 
     const savedVet = await newVet.save();
 
-    const mailoptions = createMailOptions(
-      "hello.petscan@gmail.com",
-      email,
-      "Your appointment has been scheduled",
-      "<h1>Thank for using petScan</h1>"
-    );
+    // const mailoptions = createMailOptions(
+    //   "hello.petscan@gmail.com",
+    //   email,
+    //   "Your appointment has been scheduled",
+    //   "<h1>Thank for using petScan</h1>"
+    // );
 
-    transport(mailoptions);
+    // transport(mailoptions);
     // generate token
     const accessToken = generateToken(savedVet);
     const sendData = {
