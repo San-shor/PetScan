@@ -29,13 +29,31 @@ const VetSignUp = () => {
   const [lastNameError, setLastNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [allRequiredError, setallRequiredError] = useState(false);
 
   const handleChange = (e) => {
+    setallRequiredError(false);
     const { name, value } = e.target;
     setState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+    if (name==='firstName') {
+      if (!value.trim()) return setFirstNameError(true);
+      setFirstNameError(false);
+    }
+    if (name==='lastName') {
+      if (!value.trim()) return setLastNameError(true);
+      setLastNameError(false);
+    }
+    if (name==='email') {
+      if (!value.trim()) return setEmailError(true);
+      setEmailError(false);
+    }
+    if (name==='password') {
+      if (!value || value.length<5) return setPasswordError(true);
+      setPasswordError(false);
+    }
   };
 
   const handleClickShowPassword = () => {
@@ -47,34 +65,47 @@ const VetSignUp = () => {
     // extract the user data from the state
     const { firstName, lastName, email, password } = state;
 
-    if (!firstName.trim()) return console.log('First Name is required');
-    if (!lastName.trim()) return console.log('Last Name is required');
-    if (!email.trim()) return console.log('Email is required');
-    if (!password.trim() || password.length<5) return console.log('Password Should be at least 5 characters long ');
-
-    const newVet = {
-      firstName,
-      lastName,
-      email,
-      password,
-    };
-     
-    console.log(newVet);
-    
-    // send the user data to the server
-    try {
-      const response = await apiVet.signup(newVet);
-      // save the token in the local storage
-      const { accessToken, fullName, email, user } = response;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userType", user);
-      localStorage.setItem("fullName", fullName);
-      localStorage.setItem("email", email);
-      // navigate to the dashboard
-      navigate("/vet/details");
-    } catch (error) {
-      console.log(error);
+    if (!firstName){
+      setFirstNameError(true);
+      return 
+    } 
+    if(!lastName){
+      setLastNameError(true);
+      return
+    }  
+    if (!email){
+      setEmailError(true)
+      return
+    } 
+    if(!password || password.length<5) {
+      setPasswordError(true);
+      return
     }
+
+      const newVet = {
+        firstName,
+        lastName,
+        email,
+        password,
+      };
+      // send the user data to the server
+      try {
+        const response = await apiVet.signup(newVet);
+        // save the token in the local storage
+        const { accessToken, fullName, email, user } = response;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("userType", user);
+        localStorage.setItem("fullName", fullName);
+        localStorage.setItem("email", email);
+        // navigate to the dashboard
+        navigate("/vet/details");
+      } catch (error) {
+        console.log(error);
+      }
+    
+    
+
+    
   };
 
   // const validateForm = () => {
@@ -89,7 +120,7 @@ const VetSignUp = () => {
 
   return (
     <>
-    
+    <form onSubmit={createUser}>
       <section className="vet-container">
         <AnnonymousBar />
         <div className="signup-form">
@@ -134,10 +165,11 @@ const VetSignUp = () => {
               noValidate
               autoComplete="off"
             ><Stack sx={{ width: '100%' }} spacing={2}>
-            <Alert severity="error">First name is required</Alert>
-            <Alert severity="error">Last Name is required</Alert>
-            <Alert severity="error">Email is required</Alert>
-            <Alert severity="error">Password Should be at least 5 characters long</Alert>
+            { firstNameError && <Alert severity="error">First name is required</Alert>}
+            { allRequiredError && <Alert severity="error">* Fields are required</Alert>}
+            {lastNameError && <Alert severity="error">Last Name is required</Alert>}
+            {emailError && <Alert severity="error">Email is required</Alert>}
+            {passwordError && <Alert severity="error">Password Should be at least 5 characters long</Alert>}
           </Stack>
               <TextField
                 required
@@ -243,7 +275,7 @@ const VetSignUp = () => {
             <Button
               variant="contained"
               style={{ width: "52ch" }}
-              onClick={createUser}
+              type='submit'
             >
               Create Account
             </Button>
@@ -251,6 +283,7 @@ const VetSignUp = () => {
           <Divider sx={{ mt: 2 }} />
         </div>
       </section>
+      </form>
     </>
   );
 };
