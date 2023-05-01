@@ -12,21 +12,38 @@ const Appointments = (props) => {
 
   return (
     <div>
-      <h3>Upcoming Appointments</h3>
       <Card
         sx={{
           maxWidth: 250,
           m: 1,
+          borderRadius: "10px",
+          boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.16)",
+          transition: "transform 0.3s",
+          "&:hover": {
+            transform: "scale(1.05)",
+          },
         }}
       >
-        <CardActionArea>
+        <CardActionArea sx={{ position: "relative" }}>
           <CardMedia
             component="img"
             height="140"
             image={appointment.vetProfile ? appointment.vetProfile : null}
             alt="Your Vet Profile"
+            sx={{
+              borderTopLeftRadius: "10px",
+              borderTopRightRadius: "10px",
+            }}
           />
-          <CardContent>
+          <CardContent
+            sx={{
+              backgroundColor: "#fff",
+              borderBottomLeftRadius: "10px",
+              borderBottomRightRadius: "10px",
+              maxWidth: 400,
+              m: 3,
+            }}
+          >
             <Typography
               gutterBottom
               variant="h6"
@@ -34,6 +51,9 @@ const Appointments = (props) => {
               sx={{
                 display: "flex",
                 justifyContent: "center",
+                fontWeight: "bold",
+                color: "#666",
+                marginTop: "1rem",
               }}
             >
               {appointment.vetName ? appointment.vetName : appointment.status}
@@ -44,6 +64,8 @@ const Appointments = (props) => {
               sx={{
                 display: "flex",
                 justifyContent: "center",
+                marginTop: "0.5rem",
+                color: "#999",
               }}
             >
               {appointment.concern

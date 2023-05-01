@@ -157,6 +157,7 @@ const DashboardContainer = () => {
             </div>
           </div>
           <div className="appointment-lists">
+            <h3>Upcoming Appointments</h3>
             <div className="appointment-cards">
               {
                 userType === "petParent" &&

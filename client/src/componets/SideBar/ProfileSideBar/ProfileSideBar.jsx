@@ -7,6 +7,7 @@ import LayersIcon from "@mui/icons-material/Layers";
 import PetsIcon from "@mui/icons-material/Pets";
 import GroupsIcon from "@mui/icons-material/Groups";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import AddLocationSharpIcon from "@mui/icons-material/AddLocationSharp";
 import navLogo from "../../../../public/Homepage/parent-nav.jpg";
 import "./ProfileSideBar.css";
@@ -80,7 +81,6 @@ const ProfileSideBar = () => {
               />
             </ListItemButton>
           )}
-
           {user === "petParent" ? (
             <Link to="/book-appointment">
               <ListItemButton
@@ -157,6 +157,24 @@ const ProfileSideBar = () => {
               </ListItemButton>
             </Link>
           ) : null} */}
+          <ListItemButton
+            sx={{
+              borderRadius: "10px",
+            }}
+          >
+            <ChatBubbleIcon />
+            <ListItemText
+              sx={{
+                paddingLeft: "4%",
+              }}
+              onClick={() => navigate("/chat")}
+              primaryTypographyProps={{
+                fontSize: "1.2rem",
+                fontFamily: "Roboto",
+              }}
+              primary="Chat"
+            />
+          </ListItemButton>
         </List>
       </nav>
     </section>

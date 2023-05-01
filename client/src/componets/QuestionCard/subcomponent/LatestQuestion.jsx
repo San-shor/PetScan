@@ -63,7 +63,6 @@ const LatestQuestion = () => {
         justifyContent: "center",
         flexGrow: 1,
         mt: 0,
-        paddingLeft: "5rem",
       }}
     >
       <Stack spacing={1} sx={{ width: "100%" }}>
@@ -134,8 +133,17 @@ const LatestQuestion = () => {
             <AnswerText answerText={latestQuestion} />
           </Box>
           <Divider sx={{ width: "100%", my: 2 }} />
-          <Stack direction="row" spacing={0.8} sx={{ mb: 1 }}>
-            <ThumbUpIcon />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              mb: 1,
+              color: "#001952",
+              fontWeight: "bold",
+              fontSize: 16,
+            }}
+          >
+            <ThumbUpIcon sx={{ fontSize: 24, color: "#4CAF50", mr: 0.5 }} />
             {latestQuestion.votedClients ? (
               <Typography
                 variant="body2"
@@ -145,14 +153,14 @@ const LatestQuestion = () => {
                 found this helpful
               </Typography>
             ) : null}
-          </Stack>
+          </Box>
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               p: 1,
-              backgroundColor: " #bdd9e7",
+              background: "linear-gradient(to bottom, #bdd9e7, #8fc3e6);",
               color: "black",
               fontWeight: "bold",
               borderRadius: "4px",

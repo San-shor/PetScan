@@ -87,3 +87,15 @@
   font-weight: 600;
   border-radius: 10px;
 }
+
+.select-pet {
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  background-image: linear-gradient(to right, #0072ff, #00c6ff);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -140,6 +140,8 @@ const NewsFeed = () => {
               alignItems: "center",
               justifyContent: "center",
               margin: "auto",
+              position: "sticky",
+              top: 0,
             }}
             className="feed-post"
           >

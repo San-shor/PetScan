@@ -9,6 +9,7 @@ import {
 import petImg from "../../../../../public/PetInfo/pet-info-dog.jpg";
 import PetModal from "../../../CardModal/PetModal";
 import BookAppointment from "./BookAppointment";
+import "./PetCard.css";
 
 const PetCard = (props) => {
   const { pet } = props;
@@ -56,7 +57,6 @@ const PetCard = (props) => {
               {petSpecies ? petSpecies : "Your Pet Species"}
             </Typography>
           </CardContent>
-          <BookAppointment />
         </CardActionArea>
       </Card>
       <PetModal

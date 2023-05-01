@@ -1,0 +1,47 @@
+.pet-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 30px;
+}
+
+.pet-card .MuiCard-root {
+  width: 400px;
+  height: 450px;
+
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.pet-card .MuiCard-root:hover {
+  transform: translateY(-10px);
+}
+
+.pet-card .MuiCardActionArea-root {
+  height: 100%;
+}
+
+.pet-card .MuiCardContent-root {
+  padding: 0;
+}
+
+.pet-card .MuiCardMedia-root {
+  height: 250px;
+  object-fit: cover;
+}
+
+.pet-card .MuiTypography-gutterBottom {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 20px 0 10px;
+}
+
+.pet-card .MuiTypography-body2 {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+}

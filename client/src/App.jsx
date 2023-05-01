@@ -18,6 +18,7 @@ import PrescriptionForm from "./componets/PrescriptionForm/PrescriptionForm";
 import UpcomingAppointment from "./componets/UpcomingAppointment/UpcomingAppointment";
 import Appointments from "./componets/Appointments/Appointments";
 import Land from "./Pages/Land";
+import ChatApp from "./componets/ChatApp/Chatapp";
 
 export const ImageContext = createContext(null);
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/book-appointment" element={<Meet />} />
         <Route path="/success" element={<Success />} />
         <Route path="/mycomp" element={<Mycomp />} />
+        <Route path="/chat" element={<ChatApp />} />
       </Routes>
     </ImageContext.Provider>
   );
