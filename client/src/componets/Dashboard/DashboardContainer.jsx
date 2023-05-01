@@ -72,22 +72,11 @@ const DashboardContainer = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        "& > :not(style)": {
-          m: 0,
-          width: "100%",
-          height: "100%",
-        },
-      }}
-    >
+    <Box>
       {!questionQuery ? (
-        <Paper elevation={2}>
+        <div>
           <div className="appointment">
-            {userType === "petParent" ? (
-              <BookAppointment />
-            ) : (
+            {userType === "petParent" ? null : (
               <div className="upcoming-appointments">
                 <Typography
                   variant="h5"
@@ -151,23 +140,20 @@ const DashboardContainer = () => {
               </span>
             </div>
             <div className="pet-card">
-              {
-                userType === "petParent" ? (
-                  // <AutoPlaySwipeableViews
-                  //   interval={5000}
-                  //   enableMouseEvents
-                  //   style={{ width: "40%" }}
-                  // >
-                  parent.pets.length > 0 ? (
-                    parent.pets.map((pet) => {
-                      return <PetCard key={pet._id} pet={pet} />;
-                    })
-                  ) : (
-                    <h3>No pet found!</h3>
-                  )
-                ) : null
-                // </AutoPlaySwipeableViews>
-              }
+              {userType === "petParent" ? (
+                // <AutoPlaySwipeableViews
+                //   interval={5000}
+                //   enableMouseEvents
+                //   style={{ width: "40%" }}
+                // >
+                parent.pets.length > 0 ? (
+                  parent.pets.map((pet) => {
+                    return <PetCard key={pet._id} pet={pet} />;
+                  })
+                ) : (
+                  <h3>No pet found!</h3>
+                )
+              ) : null}
             </div>
           </div>
           <div className="appointment-lists">
@@ -203,7 +189,7 @@ const DashboardContainer = () => {
               }
             </div>
           </div>
-        </Paper>
+        </div>
       ) : (
         <Paper elevation={2}>
           <div className="list-of-question-query">

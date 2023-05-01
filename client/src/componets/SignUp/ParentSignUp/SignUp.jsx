@@ -94,14 +94,6 @@ const SignUp = () => {
           <div className="header">
             <img className="logo" src={userWithPet} alt="logo" />
             <h1>Create a Pet Parent Account</h1>
-            <p>
-              <b>Or</b>
-            </p>
-            <span>
-              <Link to={"/signin"}>
-                <strong> Sign in to an existent account </strong>
-              </Link>
-            </span>
           </div>
           <Divider sx={{ mt: 2 }} />
           <div className="form">
@@ -142,6 +134,7 @@ const SignUp = () => {
                 label="Email"
                 variant="outlined"
                 onChange={handleChange}
+                type="email"
               />
             </Box>
             <Box
@@ -181,33 +174,12 @@ const SignUp = () => {
               }}
               noValidate
               autoComplete="off"
-            >
-              <TextField
-                required
-                name="confirmPassword"
-                label="Confirm Password"
-                variant="outlined"
-                onChange={handleChange}
-                type={showPassword ? "text" : "password"}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Box>
+            ></Box>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                flexDirection: "column",
+                mb: 2,
               }}
             >
               <Typography
@@ -223,7 +195,16 @@ const SignUp = () => {
               >
                 Upload a profile picture
               </Typography>
-              <ImageUpload />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  m: 1,
+                }}
+              >
+                <ImageUpload />
+              </Box>
             </Box>
           </div>
           <Box
@@ -235,6 +216,13 @@ const SignUp = () => {
             }}
           >
             <Button
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                m: 1,
+                marginTop: "2rem",
+              }}
               variant="contained"
               style={{ width: "52ch" }}
               onClick={createUser}

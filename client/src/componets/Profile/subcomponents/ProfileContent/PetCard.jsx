@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import petImg from "../../../../../public/PetInfo/pet-info-dog.jpg";
 import PetModal from "../../../CardModal/PetModal";
+import BookAppointment from "./BookAppointment";
 
 const PetCard = (props) => {
   const { pet } = props;
@@ -20,7 +21,9 @@ const PetCard = (props) => {
     <section className="pet-card">
       <Card
         sx={{
-          minWidth: 250,
+          minWidth: 300,
+
+          padding: "3.5rem",
         }}
       >
         <CardActionArea onClick={handleOpen}>
@@ -53,6 +56,7 @@ const PetCard = (props) => {
               {petSpecies ? petSpecies : "Your Pet Species"}
             </Typography>
           </CardContent>
+          <BookAppointment />
         </CardActionArea>
       </Card>
       <PetModal
