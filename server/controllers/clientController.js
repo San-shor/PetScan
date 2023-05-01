@@ -141,7 +141,7 @@ authClient.findVet = async (req, res) => {
   try {
     const vet = await Vet.find({
       specializedField: { $all: [req.body.pet.petSpecies] },
-      topRatedFor: { $all: [req.body.concern] },
+      // topRatedFor: { $all: [req.body.concern] },
     });
     res.status(200).send(vet);
   } catch (error) {
