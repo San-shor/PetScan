@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Salmon Poisoning",
+    "symptoms": [
+      "High fever",
+      "Weight loss",
+      "Loss of appetite",
+      "Diarrhea",
+      "Vomiting"
+    ]
+  },
+  {
+    "name": "Rabbit Fever",
+    "symptoms": ["Eye discharge", "Cough", "Mouth ulcers", "Diarrhea"]
+  },
+  {
+    "name": "Lenticular Sclerosis",
+    "symptoms": ["Eye discharge", "Cloudy eye", "Decreased Vision"]
+  },
+  {
+    "name": "Toxooplasmosis",
+    "symptoms": [
+      "Weight loss",
+      "Diarrhea",
+      "Vomiting,Difficulty breathing",
+      "Loss of appetite"
+    ]
+  },
+  {
+    "name": "Dry Eye",
+    "symptoms": []
+  }
+]

@@ -75,9 +75,9 @@ const QuestionCard = (props) => {
         display: "flex",
         justifyContent: "center",
         flexGrow: 1,
-        width: "100%",
+        width: "80%",
         mt: 1,
-        ml: 2,
+        ml: 20,
       }}
     >
       <Stack spacing={1} sx={{ width: "100%" }}>
@@ -221,19 +221,34 @@ const QuestionCard = (props) => {
           <Box
             sx={{
               display: "flex",
+              justifyContent: "center",
               alignItems: "center",
               p: 1,
-              backgroundColor: "#3A87AD",
-              color: "white",
+              backgroundColor: " #bdd9e7",
+              color: "black",
+              fontWeight: "bold",
+              borderRadius: "4px",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.25)",
+              marginBottom: "1rem",
             }}
           >
             {answered && userId ? (
               <>
-                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: 16, fontWeight: "bold", mr: 1 }}
+                >
                   WAS THIS ANSWER HELPFUL?
                 </Typography>
                 <IconButton
-                  sx={{ ml: 1 }}
+                  sx={{
+                    ml: 1,
+                    backgroundColor: upVote ? "#34A853" : "#fff",
+                    color: upVote ? "#fff" : "#34A853",
+                    "&:hover": {
+                      backgroundColor: upVote ? "#34A853" : "#E8F5E9",
+                    },
+                  }}
                   aria-label="upvote"
                   onClick={handleUpVote}
                   disabled={downVote ? true : false}
@@ -241,7 +256,14 @@ const QuestionCard = (props) => {
                   {upVote ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />}
                 </IconButton>
                 <IconButton
-                  sx={{ ml: 1 }}
+                  sx={{
+                    ml: 1,
+                    backgroundColor: downVote ? "#EA4335" : "#fff",
+                    color: downVote ? "#fff" : "#EA4335",
+                    "&:hover": {
+                      backgroundColor: downVote ? "#EA4335" : "#FFEBEE",
+                    },
+                  }}
                   aria-label="downvote"
                   onClick={handleDownVote}
                   disabled={upVote ? true : false}

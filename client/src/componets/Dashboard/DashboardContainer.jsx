@@ -157,13 +157,6 @@ const DashboardContainer = () => {
             </div>
           </div>
           <div className="appointment-lists">
-            {userType === "petParent" ? (
-              <div>
-                <span>
-                  <h3>Upcoming Appointments</h3>
-                </span>
-              </div>
-            ) : null}
             <div className="appointment-cards">
               {
                 userType === "petParent" &&
@@ -183,7 +176,17 @@ const DashboardContainer = () => {
                       );
                     })
                   ) : (
-                    <h3>No upcoming appointment!</h3>
+                    <h3
+                      style={{
+                        textAlign: "center",
+                        color: "#ff0000",
+                        marginTop: "2rem",
+                        fontSize: "24px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      No upcoming appointments
+                    </h3>
                   ))
                 // </AutoPlaySwipeableViews>
               }

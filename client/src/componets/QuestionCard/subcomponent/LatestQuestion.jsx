@@ -63,36 +63,36 @@ const LatestQuestion = () => {
         justifyContent: "center",
         flexGrow: 1,
         mt: 0,
+        paddingLeft: "5rem",
       }}
     >
       <Stack spacing={1} sx={{ width: "100%" }}>
         <Paper
           sx={{
             width: "35vw",
-            height: "80vh",
             display: "flex",
             flexDirection: "column",
             alignItems: "left",
             p: 2,
+            transition: "all 0.3s ease-in-out",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             ":hover": {
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               transform: "scale(1.05)",
-              transition: "all 0.3s ease-in-out",
             },
           }}
         >
-          <Typography variant="h5" sx={{ mb: 1 }}>
-            Question
+          <Typography variant="h5" sx={{ mb: 1, color: "#001952" }}>
+            Recent Question
           </Typography>
           <Typography
             variant="body1"
-            sx={{ mb: 1, fontSize: 20, color: "#001952", fontWeight: "bold" }}
+            sx={{ mb: 1, fontSize: 20, fontWeight: "bold", color: "#001952" }}
           >
             {latestQuestion.question}
           </Typography>
           <Typography
             variant="body2"
-            sx={{ mb: 1, fontSize: 13, color: "#001979" }}
+            sx={{ mb: 1, fontSize: 13, color: "#808080" }}
           >
             Asked by <strong>{latestQuestion.clientName}</strong>
           </Typography>
@@ -152,17 +152,31 @@ const LatestQuestion = () => {
               justifyContent: "center",
               alignItems: "center",
               p: 1,
-              backgroundColor: "#3A87AD",
-              color: "white",
+              backgroundColor: " #bdd9e7",
+              color: "black",
+              fontWeight: "bold",
+              borderRadius: "4px",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.25)",
+              marginBottom: "1rem",
             }}
           >
             {answered ? (
               <>
-                <Typography variant="body2" sx={{ fontSize: 14 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: 16, fontWeight: "bold", mr: 1 }}
+                >
                   WAS THIS ANSWER HELPFUL?
                 </Typography>
                 <IconButton
-                  sx={{ ml: 1 }}
+                  sx={{
+                    ml: 1,
+                    backgroundColor: upVote ? "#34A853" : "#fff",
+                    color: upVote ? "#fff" : "#34A853",
+                    "&:hover": {
+                      backgroundColor: upVote ? "#34A853" : "#E8F5E9",
+                    },
+                  }}
                   aria-label="upvote"
                   onClick={handleLatestUpVote}
                   disabled={downVote}
@@ -170,7 +184,14 @@ const LatestQuestion = () => {
                   {upVote ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />}
                 </IconButton>
                 <IconButton
-                  sx={{ ml: 1 }}
+                  sx={{
+                    ml: 1,
+                    backgroundColor: downVote ? "#EA4335" : "#fff",
+                    color: downVote ? "#fff" : "#EA4335",
+                    "&:hover": {
+                      backgroundColor: downVote ? "#EA4335" : "#FFEBEE",
+                    },
+                  }}
                   aria-label="downvote"
                   onClick={handleLatestDownVote}
                   disabled={upVote}

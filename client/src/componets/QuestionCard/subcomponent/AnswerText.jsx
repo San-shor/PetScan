@@ -20,14 +20,21 @@ const AnswerText = (props) => {
       {answerText.answer ? (
         <Typography
           variant="body2"
-          sx={{ mb: 1, fontSize: 24, color: "#001952", textAlign: "justify" }}
+          sx={{
+            mb: 1,
+            fontSize: 24,
+            color: "#001952",
+            textAlign: "justify",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: 600,
+          }}
         >
           {answerText.answer}
         </Typography>
       ) : (
         <Typography
           variant="body2"
-          sx={{ mb: 1, fontSize: 27, color: "#001952" }}
+          sx={{ mb: 1, fontSize: 27, color: "#001952", fontWeight: "bold" }}
         >
           Not Answered Yet...
         </Typography>

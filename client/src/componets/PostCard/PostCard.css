@@ -1,12 +1,89 @@
 .post-question-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  margin: 0 auto;
+  margin: 50px auto;
+  margin-top: 6rem;
 }
 
 .post-question-header {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-question-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #3b5998;
+}
+
+.post-question-header .MuiPaper-root {
+  padding: 2rem;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 600px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.post-question-header .MuiTextField-root {
+  width: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-question-header .MuiChip-root {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #e6e6e6;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #3b5998;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.post-question-header .MuiChip-root:hover {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.post-question-header .MuiChip-root.MuiChip-colorPrimary {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.post-question-header .MuiButton-root {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 1.5rem;
+  background-color: #3b5998;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.post-question-header .MuiButton-root:hover {
+  background-color: #fff;
+  color: #3b5998;
+  border: 1px solid #3b5998;
+}
+
+.post-question-header .MuiSnackbar-root {
+  margin-top: 1rem;
+}
+
+.post-question-header .MuiAlert-root {
+  width: 100%;
+  justify-content: center;
+  background-color: #4caf50;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
 }

@@ -114,7 +114,7 @@ const NewsFeed = () => {
             backgroundColor: "#42389D",
             minHeight: "80%",
             position: "relative",
-            m: "4rem",
+            m: "1rem",
           }}
         >
           {user ? (
@@ -125,6 +125,8 @@ const NewsFeed = () => {
         </Box>
         <Box
           sx={{
+            display: "grid",
+            gridTemplateColumns: "40% 60%",
             backgroundColor: "#F1F3F6",
             minHeight: "100%",
             position: "relative",
@@ -133,10 +135,8 @@ const NewsFeed = () => {
         >
           <Box
             sx={{
-              display: "flex",
               backgroundColor: "#F1F3F6",
               minHeight: "100%",
-              maxWidth: "80%",
               alignItems: "center",
               justifyContent: "center",
               margin: "auto",
@@ -150,11 +150,11 @@ const NewsFeed = () => {
                 backgroundColor: "#F1F3F6",
                 minHeight: "100%",
                 m: "1rem",
+                width: "100%",
               }}
               className="post-card"
             >
               {postCard && <PostCard />}
-              {!answerBox && <BookAppointment />}
             </Box>
             <Box
               sx={{
@@ -174,11 +174,8 @@ const NewsFeed = () => {
               flexDirection: "column",
               backgroundColor: "#F1F3F6",
               minHeight: "100%",
-              maxWidth: "59%",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "auto",
-              position: "relative",
+              marginTop: "5rem",
+              marginRight: "5rem",
             }}
             className="feed-questions"
           >

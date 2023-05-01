@@ -51,18 +51,18 @@ const PostCard = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "22vw",
+            width: "600px",
             mb: 2,
           }}
         >
-          <h2>Post a Question</h2>
+          <h2>Create a post </h2>
           <TextField
             sx={{ width: "100%", mt: 2, mb: 1 }}
             label="Post a Question"
             variant="outlined"
             value={question}
             multiline
-            maxRows={4}
+            maxRows={9}
             required
             onChange={(e) => setQuestion(e.target.value)}
           />
@@ -72,6 +72,7 @@ const PostCard = () => {
             flexWrap={"wrap"}
             sx={{ width: "100%", mt: 1.5, mb: 1 }}
           >
+            <h3>Select Your Pet</h3>
             <Chip
               label="Cat"
               color={categorySelected[0] ? "primary" : "default"}
@@ -141,10 +142,14 @@ const PostCard = () => {
           </Stack>
           <Button
             variant="contained"
-            sx={{ mt: 2, mb: 1 }}
+            sx={{
+              mt: 2,
+              mb: 1,
+              borderRadius: "1.5rem",
+            }}
             onClick={handleSubmit}
           >
-            Ask
+            Post
           </Button>
           <Snackbar
             open={success}
