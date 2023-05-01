@@ -7,6 +7,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { VetStepsContext } from "../../VetSteps/VetSteps";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const VetStepOne = () => {
   const { email, fullName, handleNext, setPostNominal, setSpecializedFields } =
@@ -31,6 +33,7 @@ const VetStepOne = () => {
           flexDirection: "column",
           justifyContent: "center",
           height: "75vh",
+          marginTop: 5
         }}
         elevation={2}
       >
@@ -109,6 +112,7 @@ const VetStepOne = () => {
               style={{
                 fontSize: 16,
                 fontWeight: 450,
+                marginLeft: 40
               }}
             >
               {email}

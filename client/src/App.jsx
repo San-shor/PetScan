@@ -9,7 +9,7 @@ import Home from "./Pages/Home";
 import AddPet from "./componets/AddPet/AddPet";
 import NewsFeed from "./componets/NewsFeed/NewsFeed";
 import Dashboard from "./Pages/Dashboard";
-
+import Mycomp from "./componets/mycomp";
 // Test
 import Meet from "./Pages/Meet";
 import Success from "./componets/Success/Success";
@@ -43,6 +43,7 @@ function App() {
         <Route path="/feed" element={<NewsFeed />} />
         <Route path="/book-appointment" element={<Meet />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/mycomp" element={<Mycomp />} />
       </Routes>
     </ImageContext.Provider>
   );

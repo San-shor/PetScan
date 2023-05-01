@@ -1,0 +1,64 @@
+[
+    {
+      "name": "Salmon Poisoning",
+      "symptoms": [
+        "High fever",
+        "Blood Symptomps",
+        "Weight loss",
+        "Loss of appetite",
+        "Diarrhea",
+        "Vomiting"
+      ]
+    },
+    {
+      "name": "Rabbit Fever (Tolaremia)",
+      "symptoms": ["Eye discharge", "Coughing", "Mouth ulcers", "Diarrhea"]
+    },
+    {
+      "name": "Hives (Urticaria)",
+      "symptoms": ["Itchy Welts"]
+    },
+    {
+      "name": "Lenticular Sclerosis",
+      "symptoms": ["Eye discharge", "Cloudy eye", "Decreased Vision"]
+    },
+    {
+      "name": "Toxooplasmosis",
+      "symptoms": [
+        "Weight loss",
+        "Diarrhea",
+        "Vomiting",
+        "Difficulty Breathing",
+        "Loss of appetite",
+        "Fever"
+      ]
+    },
+    {
+      "name": "Dry Eye (Keratoconjunctivitis Sicca)",
+      "symptoms": ["Cloudy eye","Eye discharge","Decreased Vision"]
+    },
+    {
+      "name": "Tapeworms",
+      "symptoms":["Loss of appetite", "Weight loss","Vomiting","Diarrhea"]
+    },
+    {
+      "name":"Regurgitation",
+      "symptoms":["Coughing","Gagging","Diarrhea"]
+    },
+    {
+      "name":"Pica",
+      "symptoms":["Weight loss","Loss of appetite","Anemia"]
+    },
+    {
+      "name":"Histoplasmosis",
+      "symptoms":["Fever","Weight loss","Loss of appetite","Difficulty Breathing","Coughing"]
+    },
+    {
+      "name":"Bone Cancer (Osteosareoma)",
+      "symptoms":["Coughing","Difficulty Breathing","Loss of appetite"]
+    },
+    {
+      "name":"Megaesophagus",
+      "symptoms":["Diarrhea","Vomiting","Coughing","Sneezing","Fever","Difficulty Breathing"]
+    }
+  ]
