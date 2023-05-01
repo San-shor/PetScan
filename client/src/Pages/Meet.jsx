@@ -86,6 +86,7 @@ const Meet = () => {
   };
 
   const handleConcern = (concern) => {
+    console.log(concern);
     setSelectedConcern(concern);
   };
 
