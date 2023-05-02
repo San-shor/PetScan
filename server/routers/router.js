@@ -3,7 +3,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const signInMiddleware = require("../middlewares/signInMiddleware");
 const clientController = require("../controllers/clientController");
 const vetController = require("../controllers/vetController");
-
+const chatController = require("../controllers/chatController");
 const router = express.Router();
 
 // client routes
@@ -40,4 +40,10 @@ router.post(
   authMiddleware.vet,
   vetController.sendPrescription
 );
+
+//Chat routes
+router.get("/user/chat/:userId", chatController.getUserChats);
+router.post("/chat", chatController.getChat);
+router.get("/chats/:id", chatController.getUserChats);
+
 module.exports = router;

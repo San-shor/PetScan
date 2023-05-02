@@ -45,7 +45,7 @@ function App() {
         <Route path="/book-appointment" element={<Meet />} />
         <Route path="/success" element={<Success />} />
         <Route path="/mycomp" element={<Mycomp />} />
-        <Route path="/chat" element={<ChatApp />} />
+        <Route path="/chat/:userId" element={<ChatApp />} />
       </Routes>
     </ImageContext.Provider>
   );

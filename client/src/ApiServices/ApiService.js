@@ -14,7 +14,7 @@ apiService.signin = async (user) => {
     return response.data;
   } catch (error) {
     console.log(error);
-    const { data } = response;
+    const { data } = error;
     return data.msg;
   }
 };

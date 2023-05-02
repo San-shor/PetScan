@@ -1,6 +1,6 @@
 const clientController = require("../controllers/clientController");
 const vetController = require("../controllers/vetController");
-const Client = require("../models/client.model");
+const { Client } = require("../models/client.model");
 const Vet = require("../models/vet.model");
 
 const signInMiddleware = async (req, res) => {
@@ -22,6 +22,7 @@ const signInMiddleware = async (req, res) => {
     }
     return res.status(400).json({ msg: "User does not exist" });
   } catch (error) {
+    console.log(error);
     res.status(401).send({ error: "Invalid credentials" });
   }
 };
