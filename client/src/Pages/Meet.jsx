@@ -249,10 +249,12 @@ const Meet = () => {
     console.log("In handle submit");
     const accessToken = localStorage.getItem("accessToken");
     try {
+      console.log('ntr7y', clientSymptoms);
       const appointmentData = {
         pet: selectedPet,
         concern: selectedConcern,
         vet: vetSelected,
+        symptoms: clientSymptoms
       };
       const appointment = await apiClient.createAppointment(
         accessToken,
@@ -366,7 +368,7 @@ const Meet = () => {
                         })}
                         </Box>
                           {symptomForm ?  
-                          <div>
+                          <div className="symptomForm">
                             {petType === 'Dog'?
                             <>
                           
@@ -576,9 +578,12 @@ const Meet = () => {
                         })
                       ) : activeStep === 2 ? (
                         <>
-                        <Box sx={{marginBottom:70, width:"20rem"}}>
-                          {result && result.map((item,idx) => parseFloat(item.percentage,10) > 0 ? <div key={idx}>{item.name}: {item.percentage+'%'}</div>:<span key={idx}></span>)}
-                        </Box>
+                        {petType === 'Dog' && <Box sx={{marginBottom:70, width:"40rem"}}>
+                        <h3>Chances Of Diseases your pet might have - </h3>
+                          {result && result.map((item,idx) => parseFloat(item.percentage,10) > 0 ? 
+                          <><div key={idx}>{item.name}: {item.percentage+'%'}</div></>:<span key={idx}></span>)}
+                          <h3>Choose Your Vet accordingly</h3>
+                        </Box>}
                         <StepThree
                           matchedVet={matchedVet}
                           setVetSelected={handleVetSelected}

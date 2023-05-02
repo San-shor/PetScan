@@ -153,6 +153,7 @@ authClient.findVet = async (req, res) => {
 authClient.createAppointment = async (req, res) => {
   try {
     console.log("Create new appointment", req.body);
+    const {symptoms} = req.body;
     const client = await Client.findById(req.client.id);
     const vet = await Vet.findById(req.body.vet);
     // set clientName
@@ -184,6 +185,7 @@ authClient.createAppointment = async (req, res) => {
       clientProfile,
       vetProfile,
       clientEmail,
+      symptoms
     });
     const savedAppointment = await newAppointment.save();
     // push the appointment to the client

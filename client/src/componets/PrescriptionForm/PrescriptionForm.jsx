@@ -152,6 +152,9 @@ const PrescriptionForm = ({
                 <Typography variant="body1" sx={{ mb: 0.5 }}>
                   Concern : <strong>{appointment.concern}</strong>
                 </Typography>
+                {appointment.symptoms && <Typography variant="body1" sx={{ mb: 0.5 }}>
+                  Symptoms : <strong>{appointment.symptoms}</strong>
+                </Typography>}
                 <Divider sx={{ width: "100%", my: 2 }} />
                 <Box
                   sx={{

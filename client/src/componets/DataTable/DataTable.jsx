@@ -17,13 +17,14 @@ const DataTable = ({ appointments }) => {
   const [pet, setPet] = useState({});
   const handleClose = () => setOpen(false);
 
-  const createData = (email, clientName, petName, concern, pet) => {
+  const createData = (email, clientName, petName, concern, pet, symptoms) => {
     return {
       email,
       clientName,
       petName,
       concern,
       pet: pet,
+      symptoms
     };
   };
 
@@ -33,7 +34,8 @@ const DataTable = ({ appointments }) => {
       appointment.clientName,
       appointment.petName,
       appointment.concern,
-      appointment.pet
+      appointment.pet,
+      appointment.symptoms
     );
   });
   const [rows, setRows] = useState(OrginalRows);
@@ -41,6 +43,7 @@ const DataTable = ({ appointments }) => {
 
   const handleSelection = (appointment) => {
     console.log("Appointment", appointment);
+    // console.log("Appointment Symtomps", appointment.symptoms);
     setClient({
       name: appointment.clientName,
       email: appointment.email,
@@ -73,7 +76,6 @@ const DataTable = ({ appointments }) => {
     }
     handleClose();
   };
-
   return (
     <>
       <TableContainer

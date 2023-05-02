@@ -56,6 +56,10 @@ const AppiontmentSchema = new Schema({
     default: "Pending",
   },
 
+  symptoms: {
+    type: [String],
+  },
+
   calendly: {
     type: String,
   },
