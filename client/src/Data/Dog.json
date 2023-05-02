@@ -12,7 +12,7 @@
     },
     {
       "name": "Rabbit Fever (Tolaremia)",
-      "symptoms": ["Eye discharge", "Coughing", "Mouth ulcers", "Diarrhea"]
+      "symptoms": ["Eye Issue", "Coughing", "Mouth ulcers", "Diarrhea"]
     },
     {
       "name": "Hives (Urticaria)",
@@ -20,10 +20,10 @@
     },
     {
       "name": "Lenticular Sclerosis",
-      "symptoms": ["Eye discharge", "Cloudy eye", "Decreased Vision"]
+      "symptoms": ["Eye Issue", "Eye Issues", "Eye Issuess"]
     },
     {
-      "name": "Toxooplasmosis",
+      "name": "Toxoplasmosis",
       "symptoms": [
         "Weight loss",
         "Diarrhea",
@@ -35,7 +35,7 @@
     },
     {
       "name": "Dry Eye (Keratoconjunctivitis Sicca)",
-      "symptoms": ["Cloudy eye","Eye discharge","Decreased Vision"]
+      "symptoms": ["Eye Issue","Eye Issue","Eye Issue"]
     },
     {
       "name": "Tapeworms",

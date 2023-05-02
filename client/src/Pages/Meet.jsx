@@ -18,8 +18,26 @@ import StepThree from "../componets/MultiStepForm/StepThree/StepThree";
 import ProfileNavBar from "../componets/NavBar/ProfileNavBar/ProfileNavBar";
 import Success from "../componets/Success/Success";
 import HomeNavBar from "../componets/NavBar/HomeNavBar/HomeNavBar";
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
+// import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import Dog from '../Data/Dog.json'
+// import { Button } from '@mui/material';
+import DogSymptomps from '../Data/DogSymtomps.json'
 
 export const InfomationContext = createContext(null);
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const steps = [
   "Who is this appointment for?",
@@ -39,6 +57,7 @@ const concerns = [
 const Meet = () => {
   let navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
+  const [symptomForm, setSymptomForm] = useState(false);
   const [matchedVet, setMatchedVet] = useState([]);
   const [vetSelected, setVetSelected] = useState(null);
   const [petInfo, setPetInfo] = useState([]);
@@ -46,6 +65,17 @@ const Meet = () => {
   const [selectedPet, setSelectedPet] = useState("");
   const [loading, setLoading] = useState(true);
   const [completed, setCompleted] = useState(false);
+
+  const [clientSymptoms, setClientSymptoms] = useState([]);
+  const [hasFever, setHasFever] = useState(false);
+  const [isCoughing, setIsCoughing] = useState(false);
+  const [itchyWelts, setItchyWelts] = useState(false);
+  const [eyeIssue, setEyeIssue] = useState(false);
+  const [petType, setPetType] = useState('');
+  // let result = [];
+  const [result, setResult] = useState([])
+
+
 
   const totalSteps = () => {
     return steps.length;
@@ -86,16 +116,92 @@ const Meet = () => {
   };
 
   const handleConcern = (concern) => {
-    console.log(concern);
+    if (concern === 'Behavioral'){
+      setSymptomForm(true)
+    }
+    else{
+      setSymptomForm(false)
+    }
     setSelectedConcern(concern);
+    // console.log(symptomForm)
   };
 
   const handleSelectedPet = (pet) => {
+    // console.log(pet.petSpecies);
+    setPetType(pet.petSpecies)
     setSelectedPet(pet);
   };
 
+  const getFever = (e) =>{
+    if(e.target.value==='yes'){setHasFever(true)}
+    else{setHasFever(false)}
+    // console.log(hasFever);
+  }
+  const handleCough = (e) =>{
+    if(e.target.value==='yes'){setIsCoughing(true)}
+    else{setIsCoughing(false)}
+    // console.log(isCoughing);
+  }
+  const handleItchyWelts = (e) =>{
+    if(e.target.value==='yes'){setItchyWelts(true)}
+    else{setItchyWelts(false)}
+    // console.log(itchyWelts);
+  }
+  const handleEyeIssue = (e) =>{
+    if(e.target.value==='yes'){setEyeIssue(true)}
+    else{setEyeIssue(false)}
+    // console.log(eyeIssue);
+  }
+
+  
+
+    let myArray = DogSymptomps;
+
+    const handleChange = (datass) => {
+        // console.log(datass);
+        let selectedSymptoms = []
+        datass.forEach(symptom =>{
+            selectedSymptoms.push(symptom)
+        })
+        setClientSymptoms(selectedSymptoms);
+        
+    }
+    const getResult = ()=>{
+      // activeStep === 1
+        // console.log(clientSymptoms);
+        
+        
+        if(hasFever) clientSymptoms.push('Fever')
+        if(isCoughing) clientSymptoms.push('FevCoughinger')
+        if(itchyWelts) clientSymptoms.push('Itchy Welts')
+        if(eyeIssue) clientSymptoms.push('Eye Issue')
+      let currentResult = []
+        Dog.forEach(element => {
+            let findings = 0;
+            clientSymptoms.forEach(symptom =>{
+                if (element.symptoms.includes(symptom)) findings++
+            })
+            let chances =  ((findings / (element.symptoms.length) ) * 100).toFixed(2)
+            const output = {
+                name:element.name,
+                percentage:chances
+            }
+            currentResult.push(output);
+        });
+        // console.log(result)
+        // currentResult.forEach(item =>{
+        //     if(item.percentage>1){
+        //         console.log(item)
+        //     }
+        // })
+        setResult(currentResult)
+        findVet();
+        
+    }
+
   // Check if the user is logged in
   useEffect(() => {
+    
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       window.location.href = "/signin";
@@ -228,8 +334,18 @@ const Meet = () => {
                         padding: "1rem",
                       }}
                     >
-                      {activeStep === 1 ? (
-                        concerns.map((concern, index) => {
+                      {activeStep === 1 ? ( <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection:"column"
+                        }}
+                      > 
+                      <Box 
+                        sx={{
+                          display: "flex",
+                        }}
+                      >
+                        {concerns.map((concern, index) => {
                           return (
                             <IconButton
                               sx={{
@@ -247,7 +363,194 @@ const Meet = () => {
                               />{" "}
                             </IconButton>
                           );
-                        })
+                        })}
+                        </Box>
+                          {symptomForm ?  
+                          <div>
+                            {petType === 'Dog'?
+                            <>
+                          
+                            <FormControl>
+                              <FormLabel id="demo-form-control-label-placement"><RadioButtonCheckedIcon sx={{fontSize:"small"}} /> Has Fever?</FormLabel>
+                              <RadioGroup
+                                row
+                                aria-labelledby="demo-form-control-label-placement"
+                                name="position"
+                                defaultValue="no"
+                                onChange={getFever}
+                              >
+                                <FormControlLabel
+                                  value="yes"
+                                  control={<Radio />}
+                                  label="Yes"
+                                  labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                  value="no"
+                                  control={<Radio />}
+                                  label="No"
+                                  labelPlacement="end"
+                                />
+                              </RadioGroup>
+                            </FormControl>
+                            {hasFever && <Box>
+                            <TextField
+                            size="small"
+                              type="number"
+                                name="degreeOfFever"
+                                label="Degree of Fever"
+                            />
+                            </Box>}
+                            <Box>
+                            <FormControl>
+                              <FormLabel id="demo-form-control-label-placement"><RadioButtonCheckedIcon sx={{fontSize:"small"}} /> Is Coughing?</FormLabel>
+                              <RadioGroup
+                                row
+                                aria-labelledby="demo-form-control-label-placement"
+                                name="position"
+                                defaultValue="no"
+                                onChange={handleCough}
+                              >
+                                <FormControlLabel
+                                  value="yes"
+                                  control={<Radio />}
+                                  label="Yes"
+                                  labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                  value="no"
+                                  control={<Radio />}
+                                  label="No"
+                                  labelPlacement="end"
+                                />
+                              </RadioGroup>
+                              {isCoughing && <RadioGroup
+                                row
+                                aria-labelledby="demo-form-control-label-placement"
+                                name="position"
+                                defaultValue="yes"
+                              >
+                                <FormControlLabel
+                                  value="yes"
+                                  control={<Radio />}
+                                  label="Mild Coughing"
+                                  labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                  value="no"
+                                  control={<Radio />}
+                                  label="Heavy Coughing"
+                                  labelPlacement="end"
+                                />
+                              </RadioGroup>}
+                            </FormControl>
+                            </Box>
+                            <Box>
+                            <FormControl>
+                              <FormLabel id="demo-form-control-label-placement"><RadioButtonCheckedIcon sx={{fontSize:"small"}} /> Has Itchy welts?</FormLabel>
+                              <RadioGroup
+                                row
+                                aria-labelledby="demo-form-control-label-placement"
+                                name="position"
+                                defaultValue="no"
+                                onChange={handleItchyWelts}
+                              >
+                                <FormControlLabel
+                                  value="yes"
+                                  control={<Radio />}
+                                  label="Yes"
+                                  labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                  value="no"
+                                  control={<Radio />}
+                                  label="No"
+                                  labelPlacement="end"
+                                />
+                              </RadioGroup>
+                            </FormControl>
+                            </Box>
+                            <Box>
+                            <FormControl>
+                              <FormLabel id="demo-form-control-label-placement"><RadioButtonCheckedIcon sx={{fontSize:"small"}} /> Eye Issue?</FormLabel>
+                              <RadioGroup
+                                row
+                                aria-labelledby="demo-form-control-label-placement"
+                                name="position"
+                                defaultValue="no"
+                                onChange={handleEyeIssue}
+                              >
+                                <FormControlLabel
+                                  value="yes"
+                                  control={<Radio />}
+                                  label="Yes"
+                                  labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                  value="no"
+                                  control={<Radio />}
+                                  label="No"
+                                  labelPlacement="end"
+                                />
+                              </RadioGroup>
+                              {eyeIssue && <RadioGroup
+                                row
+                                aria-labelledby="demo-form-control-label-placement"
+                                name="position"
+                                defaultValue="yes"
+                              >
+                                <FormControlLabel
+                                  value="yes"
+                                  control={<Radio />}
+                                  label="Eye Discharged"
+                                  labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                  value="no"
+                                  control={<Radio />}
+                                  label="Cloudy Eyes"
+                                  labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                  value="yaap"
+                                  control={<Radio />}
+                                  label="Decreased Vision"
+                                  labelPlacement="end"
+                                />
+                              </RadioGroup>}
+                            </FormControl>
+                            </Box>
+                            <Box>
+                            <FormLabel id="demo-form-control-label-placement"><RadioButtonCheckedIcon sx={{fontSize:"small", marginTop:2}} />Choose if there any other observeable Symptoms</FormLabel>
+                            <Autocomplete
+                              multiple
+                              id="checkboxes-tags-demo"
+                              options={myArray}
+                              onChange={(e,values)=>{
+                                handleChange(values)
+                              }}
+                              disableCloseOnSelect
+                              getOptionLabel={(option) => option}
+                              renderOption={(props, option, { selected }) => (
+                                <li {...props}>
+                                  <Checkbox
+                                    icon={icon}
+                                    checkedIcon={checkedIcon}
+                                    style={{ marginRight: 8 }}
+                                    checked={selected}
+                                    // onChange={handleChange(option)}
+                                  />
+                                  {option}
+                                </li>
+                              )}
+                              style={{ width: 500, marginTop:8}}
+                              renderInput={(params) => (
+                                <TextField {...params} label="Select Symtomps" placeholder="Symtomps" />
+                              )}
+                            />
+                            </Box></>: petType === 'Bird' ? <>bird</>:<>Cat</>}
+                          </div>: <></>}
+                        </Box>
                       ) : activeStep === 0 ? (
                         petInfo.map((pet, index) => {
                           return (
@@ -272,14 +575,20 @@ const Meet = () => {
                           );
                         })
                       ) : activeStep === 2 ? (
+                        <>
+                        <Box sx={{marginBottom:70, width:"20rem"}}>
+                          {result && result.map((item,idx) => parseFloat(item.percentage,10) > 0 ? <div key={idx}>{item.name}: {item.percentage+'%'}</div>:<span key={idx}></span>)}
+                        </Box>
                         <StepThree
                           matchedVet={matchedVet}
                           setVetSelected={handleVetSelected}
                           handleSubmit={handleSubmit}
                           vetSelected={vetSelected}
                         />
+                        </>
                       ) : null}
                     </Typography>
+                    
                   </div>
                   <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                     <Button
@@ -295,8 +604,8 @@ const Meet = () => {
                       onClick={
                         activeStep === 0
                           ? handleNext
-                          : activeStep === 1
-                          ? findVet
+                          : activeStep === 1 ?
+                          getResult
                           : activeStep === 2
                           ? handleSubmit
                           : activeStep === 3

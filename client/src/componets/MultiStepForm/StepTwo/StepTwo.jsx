@@ -43,6 +43,7 @@ const StepTwo = (props) => {
         </Badge>
       </Card>
     </Stack>
+    
   );
 };
 
