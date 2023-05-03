@@ -1,4 +1,4 @@
-.root {
+.chat-root {
   display: flex;
   justify-content: space-between;
   height: 100vh;
@@ -6,10 +6,8 @@
 }
 
 .chat-card {
-  width: 25%;
-  height: 100%;
+  /* height: 100%; */
   padding: 20px;
-  overflow-y: scroll;
 }
 
 .chat-app {
@@ -19,6 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 6;
 }
 
 .box-container {
@@ -28,7 +27,7 @@
 }
 
 .header {
-  background-color: #2962ff;
+  background: linear-gradient(45deg, #2962ff 0%, #00c6ff 100%);
   color: #fff;
   padding: 20px;
 }
@@ -37,11 +36,33 @@
   flex: 1;
   padding: 20px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 }
 
 .chatBox > div {
   display: flex;
   flex-direction: column;
+}
+
+.chatBox .user-msg {
+  align-self: flex-end;
+  max-width: 60%;
+  background-color: #2962ff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.chatBox .other-msg {
+  align-self: flex-start;
+  max-width: 60%;
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .chat-form {
@@ -56,7 +77,7 @@
   flex: 1;
   border: none;
   outline: none;
-  padding: 10px;
+  padding: 20px;
   border-radius: 20px;
   background-color: #f5f5f5;
   margin-right: 10px;
@@ -77,18 +98,47 @@
   color: #2962ff;
 }
 
-.user-msg {
-  background-color: #2962ff;
-  color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  align-self: flex-end;
+.left-chat {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
 }
 
-.otherUser-msg {
+.scroll {
+  overflow-y: scroll;
+}
+
+.chat-headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.chat-headline h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-right: 8px;
   background-color: #f5f5f5;
-  color: #000;
-  padding: 10px;
-  border-radius: 10px;
-  align-self: flex-start;
+}
+
+.recent {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c757d;
+  text-transform: uppercase;
 }

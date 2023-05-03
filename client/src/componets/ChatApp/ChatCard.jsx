@@ -1,5 +1,6 @@
 import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
+
 import axios from "axios";
 import "./ChatCard.css";
 
@@ -24,7 +25,7 @@ const ChatCard = ({ chat }) => {
 
   return (
     <div className="chat-list">
-      <div className="chat-headline">
+      {/* <div className="chat-headline">
         <h4 className="">Chats</h4>
         <div className="search-box">
           <input type="text" placeholder="serach message or user"></input>
@@ -33,13 +34,12 @@ const ChatCard = ({ chat }) => {
       </div>
       <div className="recent">
         <h5>Recent</h5>
-      </div>
+      </div> */}
       <div className="chat-messageList">
         <ul>
           <li>
             <img src={otherUser.profilePicture} alt="" />
             <h5> {otherUser.firstName + " " + otherUser.lastName}</h5>
-            <p>msg</p>
           </li>
         </ul>
       </div>

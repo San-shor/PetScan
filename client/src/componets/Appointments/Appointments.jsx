@@ -4,11 +4,33 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  Button,
 } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Appointments = (props) => {
+  const navigate = useNavigate();
   const { appointment } = props;
-  // console.log("appointment", appointment);
+  const storedUserId = localStorage.getItem("userId");
+  const storedUserType = localStorage.getItem("userType");
+
+  async function handleClick() {
+    const userId1 =
+      storedUserType === "petParent" ? storedUserId : appointment.vet;
+    const userId2 =
+      storedUserType === "petParent" ? appointment.vet : storedUserId;
+    try {
+      const response = await axios.post(`http://localhost:3001/chat`, {
+        userId1,
+        userId2,
+      });
+
+      navigate("/chat");
+    } catch (error) {
+      console.log(`Error getting chats: ${error}`);
+    }
+  }
 
   return (
     <div>
@@ -72,6 +94,22 @@ const Appointments = (props) => {
                 ? appointment.concern
                 : "For the concern of..."}
             </Typography>
+            <Button
+              onClick={handleClick}
+              variant="contained"
+              sx={{
+                marginTop: "1rem",
+                borderRadius: "50px",
+                backgroundColor: "#dc3545",
+                color: "#fff",
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "#c82333",
+                },
+              }}
+            >
+              Started Chat
+            </Button>
           </CardContent>
         </CardActionArea>
       </Card>

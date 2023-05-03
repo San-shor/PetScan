@@ -5,7 +5,8 @@ import axios from "axios";
 
 import { io } from "socket.io-client";
 import SendIcon from "@mui/icons-material/Send";
-import { useParams } from "react-router-dom";
+import moment from "moment";
+
 import ChatCard from "./ChatCard";
 
 const ChatApp = () => {
@@ -65,11 +66,13 @@ const ChatApp = () => {
     setMessage(event.target.value);
   };
   const handleSubmit = () => {
+    const time = new Date();
     if (chatId && storedUserId && message)
       socket.emit("send_message", {
         content: message,
         chatId,
         sender: storedUserId,
+        time,
       });
   };
 
@@ -101,12 +104,26 @@ const ChatApp = () => {
   }, [selectedChat]);
 
   return (
-    <div className="root">
-      {chats.map((chat) => (
-        <div className="chat-card" onClick={() => handleSelectChat(chat)}>
-          <ChatCard key={chat._id} chat={chat}></ChatCard>
+    <div className="chat-root">
+      <div className="left-chat">
+        <div className="chat-headline">
+          <h4 className="">Chats</h4>
+          <div className="search-box">
+            <input type="text" placeholder="serach message or user"></input>
+            <button type="button" className="btn"></button>
+          </div>
         </div>
-      ))}
+        <div className="recent">
+          <h5>Recent</h5>
+        </div>
+        <div className="scroll">
+          {chats.map((chat) => (
+            <div className="chat-card" onClick={() => handleSelectChat(chat)}>
+              <ChatCard key={chat._id} chat={chat}></ChatCard>
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="chat-app">
         <Box className="box-container">
           <Box className="header">
@@ -115,14 +132,27 @@ const ChatApp = () => {
           <Box className="chatBox">
             {selectedChat.messages.map((msg, index) => (
               <Box key={index} my={1}>
+                <div></div>
                 {msg.sender === storedUserId ? (
-                  <Typography className="user-msg" variant="subtitle1">
-                    {msg.content}
-                  </Typography>
+                  <div>
+                    <Typography className="user-msg" variant="subtitle1">
+                      {msg.content}
+                    </Typography>
+                    <Typography>
+                      {" "}
+                      {moment(msg.time).format("h:mm a")}
+                    </Typography>
+                  </div>
                 ) : (
-                  <Typography className="otherUser-msg" variant="subtitle1">
-                    {msg.content}
-                  </Typography>
+                  <div>
+                    <Typography className="other-msg" variant="subtitle1">
+                      {msg.content}
+                    </Typography>
+                    <Typography>
+                      {" "}
+                      {moment(msg.time).format("h:mm a")}
+                    </Typography>
+                  </div>
                 )}
               </Box>
             ))}

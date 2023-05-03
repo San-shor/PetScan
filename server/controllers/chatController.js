@@ -63,9 +63,11 @@ const addMessage = async (req, res) => {
   try {
     const { id } = req.params;
     const { content, sender } = req.body;
+    const time = new Date();
+    console.log(time);
     const updatedChat = await Chat.findByIdAndUpdate(
       id,
-      { $push: { messages: [{ content, sender }] } },
+      { $push: { messages: [{ content, sender, time }] } },
       { new: true }
     );
     res.status(200).send(updatedChat);
@@ -78,9 +80,10 @@ const addMessage = async (req, res) => {
 const newMessage = async (data) => {
   try {
     const { chatId, content, sender } = data;
+    const time = new Date();
     const updatedChat = await Chat.findByIdAndUpdate(
       chatId,
-      { $push: { messages: [{ content, sender }] } },
+      { $push: { messages: [{ content, sender, time }] } },
       { new: true }
     );
     return updatedChat;
