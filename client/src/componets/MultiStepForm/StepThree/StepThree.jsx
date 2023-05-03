@@ -22,7 +22,8 @@ const StepThree = ({
   });
 
   return (
-    <>
+    <div style={{marginTop:25}}>
+    
       <Box
         sx={{
           display: "flex",
@@ -64,7 +65,7 @@ const StepThree = ({
           }}
         />
       </Box> */}
-    </>
+    </div>
   );
 };
 

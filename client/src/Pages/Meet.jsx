@@ -147,6 +147,7 @@ const Meet = () => {
     // console.log(isCoughing);
   }
   const handleItchyWelts = (e) =>{
+    console.log(e.target.value);
     if(e.target.value==='yes'){setItchyWelts(true)}
     else{setItchyWelts(false)}
     // console.log(itchyWelts);
@@ -614,7 +615,11 @@ const Meet = () => {
                               sx={{
                                 margin: "0.rem",
                                 padding: "0.5rem",
-                                borderRadius: "0.5rem",
+                                borderRadius: "20rem",
+                                border:
+                                  clientSelectedSymptoms.includes(symptom)
+                                    ? "2px solid #1FC600"
+                                    : "none",
                               }}
                               onClick={() => handleSelectedSymptoms(symptom)}
                               key={index}
@@ -654,26 +659,33 @@ const Meet = () => {
                           );
                         })
                       ) : activeStep === 2 ? (
-                        <>
-                        {petType === 'Dog' && <Box sx={{marginBottom:70, width:"40rem", backgroundColor:'red'}}>
-                        <h3>Chances Of Diseases your pet might have - </h3>
-                          {result && result.map((item,idx) => parseFloat(item.percentage,10) > 0 ? 
+                        <div style={{display: "flex", flexWrap: "wrap", flexDirection:"column"}}>
+                        {petType === 'Dog' && clientSymptoms.length>1 && <Box sx={{padding:2, borderRadius:5, backgroundColor:'#bdc6f0', color:'FFFFFF', fontFamily:'sans-serif'}}>
+                        <h4>Chances Of Diseases your pet might have - </h4>
+                          {result && result.sort((a,b) => {
+                            if(a.percentage>b.percentage) return -1
+                            else if(a.percentage<b.percentage) return 1
+                            else return 0;
+                          }).map((item,idx) => parseFloat(item.percentage,10) > 0 ? 
                           <><div key={idx}>{item.name}: {item.percentage+'%'}</div></>:<span key={idx}></span>)}
-                          <h3>Here are some vet suggestion for you, Choose Your Vet accordingly</h3>
                         </Box>}
-                        {petType === 'Cat' && <Box sx={{marginBottom:70, width:"40rem", backgroundColor:'red'}}>
-                        <h3>Chances Of Diseases your pet might have - </h3>
-                          {result && result.map((item,idx) => parseFloat(item.percentage,10) > 0 ? 
+                        {petType === 'Cat' && clientSelectedSymptoms.length>1 && <Box sx={{padding:2, borderRadius:5, backgroundColor:'#bdc6f0', color:'FFFFFF', fontFamily:'sans-serif'}}>
+                        <h4>Chances Of Diseases your pet might have - </h4>
+                          {result && result.sort((a,b) => {
+                            if(a.percentage>b.percentage) return -1
+                            else if(a.percentage<b.percentage) return 1
+                            else return 0;
+                          }).map((item,idx) => parseFloat(item.percentage,10) > 0 ? 
                           <><div key={idx}>{item.name}: {item.percentage+'%'}</div></>:<span key={idx}></span>)}
-                          <h3>Here are some vet suggestion for you, Choose Your Vet accordingly</h3>
                         </Box>}
+                        <h2 style={{alignSelf:"center", marginTop: '5rem'}}>Here are some vet suggestion for you, Choose Your Vet accordingly</h2>
                         <StepThree
                           matchedVet={matchedVet}
                           setVetSelected={handleVetSelected}
                           handleSubmit={handleSubmit}
                           vetSelected={vetSelected}
                         />
-                        </>
+                        </div>
                       ) : null}
                     </Typography>
                     

@@ -101,25 +101,25 @@ const ProfileSideBar = () => {
                 />
               </ListItemButton>
             </Link>
-          ) : (
-            <ListItemButton
-              sx={{
-                borderRadius: "10px",
-              }}
-              onClick={() => navigate("/form")}
-            >
-              <AddLocationSharpIcon />
-              <ListItemText
-                sx={{
-                  paddingLeft: "4%",
-                }}
-                primaryTypographyProps={{
-                  fontSize: "1.2rem",
-                  fontFamily: "Roboto",
-                }}
-                primary={"Add Prescription"}
-              />
-            </ListItemButton>
+          ) : ( <></>
+            // <ListItemButton
+            //   sx={{
+            //     borderRadius: "10px",
+            //   }}
+            //   onClick={() => navigate("/form")}
+            // >
+            //   <AddLocationSharpIcon />
+            //   <ListItemText
+            //     sx={{
+            //       paddingLeft: "4%",
+            //     }}
+            //     primaryTypographyProps={{
+            //       fontSize: "1.2rem",
+            //       fontFamily: "Roboto",
+            //     }}
+            //     primary={"Add Prescription"}
+            //   />
+            // </ListItemButton>
           )}
           <ListItemButton onClick={handleClick}>
             <SettingsApplicationsSharpIcon />

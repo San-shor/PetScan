@@ -189,7 +189,7 @@ const DashboardContainer = () => {
                       No upcoming appointments
                     </h3>
                   ))
-                // </AutoPlaySwipeableViews>
+                //  {/* </AutoPlaySwipeableViews> */}
               }
             </div>
           </div>
@@ -216,7 +216,7 @@ const DashboardContainer = () => {
             ) : (
               <>
                 <div className="heading-question-list">
-                  <h3>{vet.firstName}'s Answers</h3>
+                  <h3 style={{paddingTop:'30px', fontFamily:'sans-serif'}}>{vet.firstName}'s Answers</h3>
                 </div>
                 {askedQuestion.map((question, index) => {
                   return (

@@ -25,12 +25,14 @@ const QuestionLog = (props) => {
         >
           <ListItemText
             sx={{
-              paddingLeft: "4%",
-              backgroundColor: question.isAnswered ? "#8BE78B" : "#FFFFFF",
+              padding: "2%",
+              backgroundColor: question.isAnswered ? "#f1efef" : "#FFFFFF",
+              borderRadius: 2
             }}
             primaryTypographyProps={{
-              fontSize: "1.2rem",
+              fontSize: "1.3rem",
               fontFamily: "Roboto",
+              fontWeight: "bold"
             }}
             secondaryTypographyProps={{
               fontSize: "1.2rem",
@@ -38,7 +40,7 @@ const QuestionLog = (props) => {
               color: question.isAnswered ? "#000000" : "red",
             }}
             primary={`${index + 1}. ${question.question}`}
-            secondary={answeredTrack ? question.answer : "Not Answered"}
+            secondary={answeredTrack ? ' - '+question.answer : "Not Answered"}
           />
           <DeleteForeverIcon
             onClick={() => handleDelete(question._id)}

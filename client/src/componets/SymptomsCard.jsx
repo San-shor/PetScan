@@ -45,9 +45,9 @@ const SymptomsCard = (props) => {
         {concern === 'Skin' && <PetsIcon></PetsIcon>}
         {concern === 'Dental' && <EmojiNatureIcon></EmojiNatureIcon>} */}
         <Badge
-          badgeContent={
-            clientSelectedSymptoms.includes(concern) ? <CheckCircleOutlinedIcon /> : ""
-          }
+        //   badgeContent={
+        //     clientSelectedSymptoms.includes(concern) ? <CheckCircleOutlinedIcon /> : ""
+        //   }
           sx={{ width: 80, height: 80 }}
         >
           
