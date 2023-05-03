@@ -5,6 +5,7 @@ const Vet = require("../models/vet.model");
 const getChat = async (req, res) => {
   try {
     const { userId1, userId2 } = req.body;
+    console.log(userId1, userId2);
 
     const user1 = await Client.findById(userId1);
     const user2 = await Vet.findById(userId2);
@@ -88,8 +89,24 @@ const newMessage = async (data) => {
   }
 };
 
+async function getUser(req, res) {
+  try {
+    const { id } = req.params;
+    const user1 = await Client.findById(id);
+    const user2 = await Vet.findById(id);
+
+    if (user1) res.send(user1);
+    else if (user2) res.send(user2);
+    else res.status(401).send("Not a user.");
+  } catch (error) {
+    res.status(500).send(error);
+    console.log(error);
+  }
+}
+
 module.exports = {
   getChat,
+  getUser,
   getUserChats,
   addMessage,
   newMessage,

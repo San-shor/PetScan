@@ -43,6 +43,7 @@ io.on("connection", (socket) => {
   //   socket.emit("recieved message", data);
   // });
   socket.on("join_room", (room_id) => {
+    console.log("Room ID:", room_id);
     socket.join(room_id);
   });
 

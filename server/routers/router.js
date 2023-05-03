@@ -46,4 +46,5 @@ router.get("/user/chat/:userId", chatController.getUserChats);
 router.post("/chat", chatController.getChat);
 router.get("/chats/:id", chatController.getUserChats);
 
+router.get("/user/:id", chatController.getUser);
 module.exports = router;

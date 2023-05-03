@@ -6,29 +6,39 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import SendIcon from "@mui/icons-material/Send";
 import { useParams } from "react-router-dom";
+import ChatCard from "./ChatCard";
+
 const ChatApp = () => {
-  const { userId } = useParams;
   const [message, setMessage] = useState("");
+
   const [socket, setSocket] = useState();
-  const [allChat, setallChat] = useState([]);
   const [chats, setChats] = useState([]);
+  const [selectedChat, setSelectedChat] = useState({ messages: [] });
 
   const [chatId, setChatId] = useState("");
   const storedUserId = localStorage.getItem("userId");
   const storedUserType = localStorage.getItem("userType");
 
-  async function getAllChats() {}
+  const handleSelectChat = (chat) => {
+    setSelectedChat(chat);
+  };
 
-  const chatRoom = async () => {
+  async function getAllChats() {
     try {
-      const response = await axios.post("http://localhost:3001/chat", {
-        userId1: storedUserType === "petParent" ? storedUserId : userId,
-        userId2: storedUserType === "petParent" ? userId : storedUserId,
-      });
-      const chatRoomId = response.data._id;
-      setChatId(chatRoomId);
+      const response = await axios.get(
+        `http://localhost:3001/chats/${storedUserId}`
+      );
+      setChats(response.data);
+    } catch (error) {
+      console.log(`Error getting chats: ${error}`);
+    }
+  }
 
-      return response;
+  const chatRoom = async (id) => {
+    try {
+      if (selectedChat) {
+        setChatId(id);
+      }
     } catch (error) {
       console.log(`Error creating chat room: ${error}`);
     }
@@ -66,56 +76,72 @@ const ChatApp = () => {
   useEffect(() => {
     const soc = io("http://localhost:3001");
     setSocket(soc);
-
-    soc.on("receive_message", (data) => {
-      console.log(data);
-      setallChat((prevchat) => [...prevchat, data]);
-    });
-
-    chatRoom(storedUserId);
+    getAllChats();
   }, []);
 
   useEffect(() => {
     if (socket && chatId) {
       socket.on("receive_message", (data) => {
         console.log(data);
-        setallChat((prevchat) => [...prevchat, data]);
+        if (data.chatId === selectedChat._id) {
+          setSelectedChat((prevState) => ({
+            ...prevState,
+            messages: [...prevState.messages, data],
+          }));
+        } else {
+        }
       });
+
       socket.emit("join_room", chatId);
     }
   }, [socket, chatId]);
 
+  useEffect(() => {
+    chatRoom(selectedChat._id);
+  }, [selectedChat]);
+
   return (
     <div className="root">
-      <Box className="box-container">
-        <Box className="header">
-          <Typography variant="h5">Chat App</Typography>
+      {chats.map((chat) => (
+        <div className="chat-card" onClick={() => handleSelectChat(chat)}>
+          <ChatCard key={chat._id} chat={chat}></ChatCard>
+        </div>
+      ))}
+      <div className="chat-app">
+        <Box className="box-container">
+          <Box className="header">
+            <Typography variant="h5">Chat App</Typography>
+          </Box>
+          <Box className="chatBox">
+            {selectedChat.messages.map((msg, index) => (
+              <Box key={index} my={1}>
+                {msg.sender === storedUserId ? (
+                  <Typography className="user-msg" variant="subtitle1">
+                    {msg.content}
+                  </Typography>
+                ) : (
+                  <Typography className="otherUser-msg" variant="subtitle1">
+                    {msg.content}
+                  </Typography>
+                )}
+              </Box>
+            ))}
+          </Box>
+          <form className="chat-form" onSubmit={handleSendMessage}>
+            <input
+              placeholder="Type a message..."
+              variant="outlined"
+              size="small"
+              value={message}
+              onChange={handleInputChange}
+              className="input"
+            />
+            <IconButton className="button" type="submit" onClick={handleSubmit}>
+              <SendIcon />
+            </IconButton>
+          </form>
         </Box>
-        <Box className="chatBox">
-          {allChat.map((msg, index) => (
-            <Box key={index} my={1}>
-              {msg.sender === storedUserId ? (
-                <Typography variant="subtitle1">{msg.content}</Typography>
-              ) : (
-                <Typography variant="subtitle1">{msg.content}</Typography>
-              )}
-            </Box>
-          ))}
-        </Box>
-        <form className="chat-form" onSubmit={handleSendMessage}>
-          <input
-            placeholder="Type a message..."
-            variant="outlined"
-            size="small"
-            value={message}
-            onChange={handleInputChange}
-            className="input"
-          />
-          <IconButton className="button" type="submit" onClick={handleSubmit}>
-            <SendIcon />
-          </IconButton>
-        </form>
-      </Box>
+      </div>
     </div>
   );
 };
