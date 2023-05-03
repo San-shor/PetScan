@@ -32,7 +32,9 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Dog from '../Data/Dog.json'
 // import { Button } from '@mui/material';
-import DogSymptomps from '../Data/DogSymtomps.json'
+import DogSymptomps from '../Data/DogSymtomps.json';
+import Cat from "../Data/cat.json"
+import SymptomsCard from "../componets/SymptomsCard";
 
 export const InfomationContext = createContext(null);
 
@@ -67,14 +69,16 @@ const Meet = () => {
   const [completed, setCompleted] = useState(false);
 
   const [clientSymptoms, setClientSymptoms] = useState([]);
+  const [clientSelectedSymptoms, setClientSelectedSymptoms] = useState([]);
   const [hasFever, setHasFever] = useState(false);
   const [isCoughing, setIsCoughing] = useState(false);
   const [itchyWelts, setItchyWelts] = useState(false);
   const [eyeIssue, setEyeIssue] = useState(false);
   const [petType, setPetType] = useState('');
   // let result = [];
-  const [result, setResult] = useState([])
-
+  const [result, setResult] = useState([]);
+  // const biral =['dsf','ds','sd']
+  let [catSymptoms, setCatSymptoms] = useState([]);
 
 
   const totalSteps = () => {
@@ -156,7 +160,6 @@ const Meet = () => {
   
 
     let myArray = DogSymptomps;
-
     const handleChange = (datass) => {
         // console.log(datass);
         let selectedSymptoms = []
@@ -169,16 +172,33 @@ const Meet = () => {
     const getResult = ()=>{
       // activeStep === 1
         // console.log(clientSymptoms);
+        console.log(petType);
+        console.log('im called');
         
+        let currentResult = []
         
-        if(hasFever) clientSymptoms.push('Fever')
-        if(isCoughing) clientSymptoms.push('FevCoughinger')
-        if(itchyWelts) clientSymptoms.push('Itchy Welts')
-        if(eyeIssue) clientSymptoms.push('Eye Issue')
-      let currentResult = []
-        Dog.forEach(element => {
+        if(petType==='Dog'){
+          if(hasFever) clientSymptoms.push('Fever')
+          if(isCoughing) clientSymptoms.push('FevCoughinger')
+          if(itchyWelts) clientSymptoms.push('Itchy Welts')
+          if(eyeIssue) clientSymptoms.push('Eye Issue')
+          Dog.forEach(element => {
+              let findings = 0;
+              clientSymptoms.forEach(symptom =>{
+                  if (element.symptoms.includes(symptom)) findings++
+              })
+              let chances =  ((findings / (element.symptoms.length) ) * 100).toFixed(2)
+              const output = {
+                  name:element.name,
+                  percentage:chances
+              }
+              currentResult.push(output);
+          });
+       }
+       if(petType==='Cat'){
+        Cat.forEach(element => {
             let findings = 0;
-            clientSymptoms.forEach(symptom =>{
+            clientSelectedSymptoms.forEach(symptom =>{
                 if (element.symptoms.includes(symptom)) findings++
             })
             let chances =  ((findings / (element.symptoms.length) ) * 100).toFixed(2)
@@ -188,12 +208,7 @@ const Meet = () => {
             }
             currentResult.push(output);
         });
-        // console.log(result)
-        // currentResult.forEach(item =>{
-        //     if(item.percentage>1){
-        //         console.log(item)
-        //     }
-        // })
+     }
         setResult(currentResult)
         findVet();
         
@@ -221,6 +236,29 @@ const Meet = () => {
       }
     };
     getPetInfo(accessToken);
+    
+    let bilai = []
+    Cat.forEach( item => {
+      item.symptoms.forEach( symptoms => {
+        if (!bilai.includes(symptoms)){
+          bilai.push(symptoms);
+        }
+      })
+    })
+
+    setCatSymptoms(bilai);
+
+    // Cat.map(item => {
+    //   console.log(item);
+    //   item.symptoms.map(symptom =>{
+    //     if (!catSymptoms.includes(symptom)){
+    //       console.log(symptom);
+    //       catSymptoms.push(symptom);
+    //     }
+    //   })
+    // })
+    // console.log(catSymptoms)
+
   }, []);
 
   const findVet = async () => {
@@ -249,7 +287,7 @@ const Meet = () => {
     console.log("In handle submit");
     const accessToken = localStorage.getItem("accessToken");
     try {
-      console.log('ntr7y', clientSymptoms);
+      // console.log('ntr7y', clientSymptoms);
       const appointmentData = {
         pet: selectedPet,
         concern: selectedConcern,
@@ -274,6 +312,25 @@ const Meet = () => {
   const handleVetSelected = (vet) => {
     setVetSelected(vet);
   };
+  const handleSelectedSymptoms = (symptom) => {
+    // console.log(symptom);
+    
+    if(!clientSelectedSymptoms.includes(symptom)){
+
+      
+
+      setClientSelectedSymptoms(previousData=>[...previousData,symptom]);
+      
+    }else{
+      // console.log(clientSelectedSymptoms.indexOf(symptom))
+      
+      setClientSelectedSymptoms(prevData=>prevData.filter((el)=>el!=symptom));
+      
+    
+      // setClientSelectedSymptoms(previousData=>previousData.splice(position,1));
+      console.log(clientSelectedSymptoms)
+    }
+  }
 
   if (loading) {
     return <CircularProgress />;
@@ -351,7 +408,7 @@ const Meet = () => {
                           return (
                             <IconButton
                               sx={{
-                                margin: "0.5rem",
+                                margin: "0.rem",
                                 padding: "0.5rem",
                                 borderRadius: "0.5rem",
                               }}
@@ -550,7 +607,27 @@ const Meet = () => {
                                 <TextField {...params} label="Select Symtomps" placeholder="Symtomps" />
                               )}
                             />
-                            </Box></>: petType === 'Bird' ? <>bird</>:<>Cat</>}
+                            </Box></>: petType === 'Bird' ? <>bird</>:<>
+                            {catSymptoms.map((symptom, index) => {
+                          return (
+                            <IconButton
+                              sx={{
+                                margin: "0.rem",
+                                padding: "0.5rem",
+                                borderRadius: "0.5rem",
+                              }}
+                              onClick={() => handleSelectedSymptoms(symptom)}
+                              key={index}
+                            >
+                              <SymptomsCard
+                                key={index}
+                                concern={symptom}
+                                clientSelectedSymptoms= {clientSelectedSymptoms}
+                              />{" "}
+                            </IconButton>
+                          );
+                        })}
+                            </>}
                           </div>: <></>}
                         </Box>
                       ) : activeStep === 0 ? (
@@ -578,11 +655,17 @@ const Meet = () => {
                         })
                       ) : activeStep === 2 ? (
                         <>
-                        {petType === 'Dog' && <Box sx={{marginBottom:70, width:"40rem"}}>
+                        {petType === 'Dog' && <Box sx={{marginBottom:70, width:"40rem", backgroundColor:'red'}}>
                         <h3>Chances Of Diseases your pet might have - </h3>
                           {result && result.map((item,idx) => parseFloat(item.percentage,10) > 0 ? 
                           <><div key={idx}>{item.name}: {item.percentage+'%'}</div></>:<span key={idx}></span>)}
-                          <h3>Choose Your Vet accordingly</h3>
+                          <h3>Here are some vet suggestion for you, Choose Your Vet accordingly</h3>
+                        </Box>}
+                        {petType === 'Cat' && <Box sx={{marginBottom:70, width:"40rem", backgroundColor:'red'}}>
+                        <h3>Chances Of Diseases your pet might have - </h3>
+                          {result && result.map((item,idx) => parseFloat(item.percentage,10) > 0 ? 
+                          <><div key={idx}>{item.name}: {item.percentage+'%'}</div></>:<span key={idx}></span>)}
+                          <h3>Here are some vet suggestion for you, Choose Your Vet accordingly</h3>
                         </Box>}
                         <StepThree
                           matchedVet={matchedVet}

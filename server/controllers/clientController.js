@@ -1,4 +1,4 @@
-const Client = require("../models/client.model");
+const { Client } = require("../models/client.model");
 const Pet = require("../models/pet.model");
 const Question = require("../models/question.model");
 const Appointment = require("../models/appointment");
@@ -71,6 +71,7 @@ authClient.signIn = async (req, res) => {
       .status(200)
       .send({ accessToken, user: "petParent", userId: client._id });
   } catch (error) {
+    console.log(error);
     res.status(401).send({ error: "Invalid credentials" });
   }
 };

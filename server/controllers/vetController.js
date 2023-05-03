@@ -1,11 +1,12 @@
 const Vet = require("../models/vet.model");
-const Client = require("../models/client.model");
+const { Client } = require("../models/client.model");
 const Pet = require("../models/pet.model");
 const Question = require("../models/question.model");
 const { prescriptionMail } = require("../config/mailoptions");
 const transport = require("../config/nodemailer");
 const { generateToken } = require("../config/generateToken");
 const bcrypt = require("bcrypt");
+const { vet } = require("../middlewares/authMiddleware");
 
 const authVet = {};
 
@@ -49,7 +50,7 @@ authVet.signUp = async (req, res) => {
       accessToken,
       fullName: `${savedVet.firstName} ${savedVet.lastName}`,
       email: savedVet.email,
-      user: "petParent",
+      user: "vet",
     };
     res.status(201).send(sendData);
   } catch (error) {
@@ -81,7 +82,9 @@ authVet.signIn = async (req, res) => {
     const sendData = {
       accessToken,
       user: "vet",
+      userId: vetUser._id,
     };
+    console.log("sendData", sendData.userId);
     res.status(200).send(sendData);
   } catch (error) {
     console.log(error);

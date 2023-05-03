@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET || "is this a secret?";
-const Client = require("../models/client.model");
+const { Client } = require("../models/client.model");
 const Vet = require("../models/vet.model");
 
 const authMiddleware = {};

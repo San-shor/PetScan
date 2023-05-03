@@ -1,0 +1,94 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.chat-card {
+  width: 25%;
+  height: 100%;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.chat-app {
+  width: 75%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  background-color: #2962ff;
+  color: #fff;
+  padding: 20px;
+}
+
+.chatBox {
+  flex: 1;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.chatBox > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-form {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid #e6e6e6;
+  background-color: #fff;
+}
+
+.chat-form input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  margin-right: 10px;
+}
+
+.chat-form button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.chat-form button:hover {
+  color: #2962ff;
+}
+
+.chat-form svg {
+  font-size: 30px;
+  color: #2962ff;
+}
+
+.user-msg {
+  background-color: #2962ff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  align-self: flex-end;
+}
+
+.otherUser-msg {
+  background-color: #f5f5f5;
+  color: #000;
+  padding: 10px;
+  border-radius: 10px;
+  align-self: flex-start;
+}

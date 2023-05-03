@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Diabetes",
+    "symptoms": [
+      "Increased urination",
+      "Excessive thirst",
+      "Weight loss",
+      "Loss of appetite",
+      "Vomiting"
+    ]
+  },
+  {
+    "name": "Osteoarthritis",
+    "symptoms": [
+      "Weight loss",
+      "Loss of appetite",
+      "Inability to walk, jump and play",
+      "Difficulty grooming",
+      "Sleeping more"
+    ]
+  },
+  {
+    "name": "Liver Disease",
+    "symptoms": [
+      "Decreased appetite",
+      "Vomiting",
+      "Diarrhea",
+      "Fever",
+      "Weight loss"
+    ]
+  },
+  {
+    "name": "Heart Diseases",
+    "symptoms": [
+      "Poor appetite",
+      "Weight loss",
+      "Lethargy",
+      "Vomiting",
+      "Swollen Abdomen"
+    ]
+  },
+  {
+    "name": "Heartworm",
+    "symptoms": ["Coughing", "Decreased appetite", "Weight loss", "Vomiting"]
+  },
+  {
+    "name": "Ringworm",
+    "symptoms": ["Hair loss", "Itching", "Skin redness", "Scaling"]
+  },
+  {
+    "name": "Hyperthyroidism",
+    "symptoms": ["Weight loss", "Increased appetite", "Vomiting", "Diarrhea"]
+  },
+  {
+    "name": "Feline leukemia virus",
+    "symptoms": [
+      "Loss of appetite",
+      "Weight loss",
+      "Pale gums",
+      "Yellow color in the mouth and whites of eyes",
+      "Fever"
+    ]
+  },
+  {
+    "name": "Rabies",
+    "symptoms": [
+      "Loss of appetite",
+      "Loss of muscle control"
+    ]
+  }
+]
