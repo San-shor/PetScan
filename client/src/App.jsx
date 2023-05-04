@@ -19,6 +19,7 @@ import UpcomingAppointment from "./componets/UpcomingAppointment/UpcomingAppoint
 import Appointments from "./componets/Appointments/Appointments";
 import Land from "./Pages/Land";
 import ChatApp from "./componets/ChatApp/Chatapp";
+import RSidebar from "./componets/RSidebar";
 
 export const ImageContext = createContext(null);
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/mycomp" element={<Mycomp />} />
         <Route path="/chat" element={<ChatApp />} />
+        <Route path="/sbar" element={<RSidebar />} />
       </Routes>
     </ImageContext.Provider>
   );

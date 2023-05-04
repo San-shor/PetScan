@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../ApiServices/ApiService";
+import Alert from '@mui/material/Alert';
+// import Stack from '@mui/material/Stack';
 import {
   Stack,
   Button,
@@ -29,6 +31,7 @@ const SignIn = () => {
   const [state, setState] = useState(initialState);
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [wrongPasswordError, setWrongPasswordError] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,15 +53,19 @@ const SignIn = () => {
       email,
       password,
     };
+    
+  
 
     // send the user data to the server
     const response = await apiService.signin(user);
 
-    //
+    // console.log(response);
     if (response.error) {
-      alert(`${res.msg}`);
+      // alert(`${response.error}`);
+      setWrongPasswordError(true);
       setState(initialState);
     } else {
+      console.log("Correct info")
       // save the token and usetype in the local storage
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("userType", response.user);
@@ -89,7 +96,10 @@ const SignIn = () => {
           </div>
           <Divider sx={{ mt: 2 }} />
           <div className="form">
-            <Box
+          <Stack sx={{ width: '100%' }} spacing={2}>
+      {wrongPasswordError && <Alert severity="error">Wrong Password</Alert>}
+    </Stack>
+            <Box style={{marginTop:70}}
               component="form"
               sx={{
                 "& .MuiTextField-root": {
@@ -143,8 +153,7 @@ const SignIn = () => {
                 }}
               />
             </Box>
-          </div>
-          <Box
+            <Box
             sx={{
               display: "flex",
               justifyContent: "center",
@@ -154,7 +163,6 @@ const SignIn = () => {
           >
             <Button
               variant="contained"
-              style={{ width: "60%" }}
               onClick={LoginUser}
             >
               Sign In
@@ -163,8 +171,10 @@ const SignIn = () => {
           <div className="forgot-password">
             <Link to={"/register"}>Forgot Password?</Link>
           </div>
-          <Divider sx={{ mt: 2 }} />
+          <Divider sx={{ mt: 2 , marginBottom:10}} />
         </div>
+          </div>
+         
       </section>
     </>
   );

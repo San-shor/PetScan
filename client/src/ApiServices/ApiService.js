@@ -13,9 +13,9 @@ apiService.signin = async (user) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
-    const { data } = error;
-    return data.msg;
+    // console.log("axios",error);
+    const { data } = error.response;
+    return data;
   }
 };
 

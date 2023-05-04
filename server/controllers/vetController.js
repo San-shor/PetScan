@@ -68,13 +68,13 @@ authVet.signIn = async (req, res) => {
     // Check for existing user
     const vetUser = await Vet.findOne({ email });
     if (!vetUser) {
-      return res.status(400).json({ msg: "User does not exist" });
+      return res.status(400).json({ error: "User does not exist" });
     }
 
     // Validate password
     const isMatch = await bcrypt.compare(password, vetUser.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+      return res.status(400).json({ error: "Invalid credentials" });
     }
 
     // generate token
