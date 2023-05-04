@@ -14,6 +14,7 @@ const ChatCard = ({ chat }) => {
 
   async function getOtherUserInfo(id) {
     const response = await axios.get(`http://localhost:3001/user/${id}`);
+    console.log(response);
 
     setOtherUser(response.data);
   }
@@ -25,20 +26,18 @@ const ChatCard = ({ chat }) => {
 
   return (
     <div className="chat-list">
-      {/* <div className="chat-headline">
-        <h4 className="">Chats</h4>
-        <div className="search-box">
-          <input type="text" placeholder="serach message or user"></input>
-          <button type="button" className="btn"></button>
-        </div>
-      </div>
-      <div className="recent">
-        <h5>Recent</h5>
-      </div> */}
       <div className="chat-messageList">
         <ul>
           <li>
-            <img src={otherUser.profilePicture} alt="" />
+            <img
+              src={
+                otherUser.vetProfile
+                  ? otherUser.vetProfile
+                  : otherUser.profilePicture
+              }
+              alt=""
+            />
+
             <h5> {otherUser.firstName + " " + otherUser.lastName}</h5>
           </li>
         </ul>

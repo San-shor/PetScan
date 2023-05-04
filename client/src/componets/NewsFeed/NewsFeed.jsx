@@ -8,6 +8,7 @@ import LatestQuestion from "../QuestionCard/subcomponent/LatestQuestion";
 import BookAppointment from "../Profile/subcomponents/ProfileContent/BookAppointment";
 import { Box } from "@mui/material";
 import AnnonymousBar from "../NavBar/AnnonymousBar/AnnonymousBar";
+import "./newsfeed.css";
 
 export const NewsFeedContext = createContext();
 
@@ -108,6 +109,7 @@ const NewsFeed = () => {
           backgroundColor: "#F1F3F6",
           minHeight: "100%",
         }}
+        className="box-container"
       >
         <Box
           sx={{
@@ -137,28 +139,31 @@ const NewsFeed = () => {
             sx={{
               backgroundColor: "#F1F3F6",
               minHeight: "100%",
+              display: "flex",
+              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
+              // justifyContent: "center",
               margin: "auto",
               position: "sticky",
               top: 0,
+              paddingTop: "5rem",
             }}
             className="feed-post"
           >
-            <Box
+            <Box // postcard
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 backgroundColor: "#F1F3F6",
                 minHeight: "100%",
-                m: "1rem",
+                // m: "1rem",
                 width: "100%",
               }}
               className="post-card"
             >
               {postCard && <PostCard />}
             </Box>
-            <Box
+            <Box // recent question
               sx={{
                 display: "flex",
                 flexDirection: "column",

@@ -132,23 +132,22 @@ const ChatApp = () => {
           <Box className="chatBox">
             {selectedChat.messages.map((msg, index) => (
               <Box key={index} my={1}>
-                <div></div>
                 {msg.sender === storedUserId ? (
-                  <div>
+                  <div className="user-msg-container">
                     <Typography className="user-msg" variant="subtitle1">
                       {msg.content}
                     </Typography>
-                    <Typography>
+                    <Typography sx={{ marginLeft: "8px" }}>
                       {" "}
                       {moment(msg.time).format("h:mm a")}
                     </Typography>
                   </div>
                 ) : (
-                  <div>
+                  <div className="other-msg-container">
                     <Typography className="other-msg" variant="subtitle1">
                       {msg.content}
                     </Typography>
-                    <Typography>
+                    <Typography sx={{ marginRight: "8px" }}>
                       {" "}
                       {moment(msg.time).format("h:mm a")}
                     </Typography>
